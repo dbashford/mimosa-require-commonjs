@@ -35,3 +35,7 @@ requireCommonjs:
 ```
 
 * `exclude`: an array of regexes. Files matching these regexes will not be wrapped. By default vendor scripts and `main.`/`main-` files are not wrapped. Vendor browser files often don't take kindly to being wrapped.  `main.` and `main-` are there as assumed matches for main requirejs config files.
+
+## Example
+
+The [AngularFunMimosaCommonJS](https://github.com/dbashford/AngularFunMimosaCommonJS) project is a working example of a project that uses Mimosa and CommonJS.  Check it out.  Hopefully it'll answer any questions you have.
