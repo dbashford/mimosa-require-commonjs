@@ -49,9 +49,6 @@ exports.validate = (config) ->
     else
       errors.push "requireCommonjs configuration must be an object."
 
-  if errors.length is 0 and config.requireCommonjs.exclude?.length > 0
-    config.requireCommonjs.exclude = new RegExp config.requireCommonjs.exclude.join("|"), "i"
-
   errors
 
 __determinePath = (thePath, relativeTo) ->
