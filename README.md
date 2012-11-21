@@ -31,10 +31,10 @@ The module will not wrap files that it determines are already wrapped in a `defi
 
 ```
 requireCommonjs:
-  exclude:["[/\\\\]vendor[/\\\\]", "[/\\\\]main[\\.-]"]
+  exclude:[/[/\\]vendor[/\\]/, /[/\\]main[\.-]/]
 ```
 
-* `exclude`: an array of regexes. Files matching these regexes will not be wrapped. By default vendor scripts and `main.`/`main-` files are not wrapped. Vendor browser files often don't take kindly to being wrapped.  `main.` and `main-` are there as assumed matches for main requirejs config files.
+* `exclude`: an array of regexes and/or strings. List of regexes or strings to match files that should be excluded from wrapping in requirejs' commonjs wrapper.  String paths can be absolute or relative to the watch.javascriptDir.  Regexes are applied to the entire path. By default anything in a vendor folder and anything that begins with 'main.' or 'main-' are excluded as presumably those are already wrapped or are main requirejs config files and should not be wrapped in a commonjs wrapper.
 
 ## Example
 

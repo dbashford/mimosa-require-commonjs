@@ -12,8 +12,10 @@ _applyCommonJSWrapper = (mimosaConfig, options, next) ->
   return next() unless options.files?.length > 0
 
   for file in options.files
-    if mimosaConfig.requireCommonjs?.exclude? and file.inputFileName.match mimosaConfig.requireCommonjs.exclude
-      logger.debug "skipping commonjs wrapping for [[ #{file.inputFileName} ]], file is excluded"
+    if mimosaConfig.requireCommonjs?.excludeRegex? and file.inputFileName.match mimosaConfig.requireCommonjs.excludeRegex
+      logger.debug "skipping commonjs wrapping for [[ #{file.inputFileName} ]], file is excluded via regex"
+    else if mimosaConfig.requireCommonjs.exclude.indexOf(file.inputFileName) > -1
+      logger.debug "skipping commonjs wrapping for [[ #{file.inputFileName} ]], file is excluded via string path"
     else
       if file.outputFileText.match defineRegex
         logger.debug "Not wrapping [[ #{file.inputFileName} ]], it already contains a define block"
