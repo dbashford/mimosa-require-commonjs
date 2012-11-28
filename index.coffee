@@ -30,6 +30,7 @@ _wrap = (text) ->
     var __filename = module.uri || "", __dirname = __filename.substring(0, __filename.lastIndexOf("/") + 1);
     #{text}
   });
+
   """
 
 module.exports =
