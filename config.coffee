@@ -1,9 +1,5 @@
 "use strict"
 
-path = require 'path'
-
-windowsDrive = /^[A-Za-z]:\\/
-
 exports.defaults = ->
   requireCommonjs:
     exclude:[/[/\\]vendor[/\\]/, /[/\\]main[\.-]/]
@@ -23,35 +19,10 @@ exports.placeholder = ->
                                 # not be wrapped.
   """
 
-exports.validate = (config) ->
+exports.validate = (config, validators) ->
   errors = []
-  if config.requireCommonjs?
-    if typeof config.requireCommonjs is "object" and not Array.isArray(config.requireCommonjs)
-      if config.requireCommonjs.exclude?
-        if Array.isArray(config.requireCommonjs.exclude)
-          regexes = []
-          newExclude = []
-          for exclude in config.requireCommonjs.exclude
-            if typeof exclude is "string"
-              newExclude.push __determinePath exclude, config.watch.compiledJavascriptDir
-            else if exclude instanceof RegExp
-              regexes.push exclude.source
-            else
-              errors.push "requireCommonjs.exclude must be an array of strings and/or regexes."
-              break
 
-          if regexes.length > 0
-            config.requireCommonjs.excludeRegex = new RegExp regexes.join("|"), "i"
-
-          config.requireCommonjs.exclude = newExclude
-        else
-          errors.push "requireCommonjs.exclude must be an array."
-    else
-      errors.push "requireCommonjs configuration must be an object."
+  if validators.ifExistsIsObject(errors, "requireCommonjs config", config.requireCommonjs)
+    validators.ifExistsFileExcludeWithRegexAndString(errors, "requireCommonjs.exclude", config.requireCommonjs, config.watch.compiledJavascriptDir)
 
   errors
-
-__determinePath = (thePath, relativeTo) ->
-  return thePath if windowsDrive.test thePath
-  return thePath if thePath.indexOf("/") is 0
-  path.join relativeTo, thePath
