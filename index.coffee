@@ -17,11 +17,12 @@ _applyCommonJSWrapper = (mimosaConfig, options, next) ->
     else if mimosaConfig.requireCommonjs.exclude.indexOf(file.inputFileName) > -1
       logger.debug "skipping commonjs wrapping for [[ #{file.inputFileName} ]], file is excluded via string path"
     else
-      if file.outputFileText.match defineRegex
-        logger.debug "Not wrapping [[ #{file.inputFileName} ]], it already contains a define block"
-      else
-        logger.debug "CommonJS wrapping [[ #{file.inputFileName} ]]"
-        file.outputFileText = _wrap(file.outputFileText)
+      if file.outputFileText?
+        if file.outputFileText.match defineRegex
+          logger.debug "Not wrapping [[ #{file.inputFileName} ]], it already contains a define block"
+        else
+          logger.debug "CommonJS wrapping [[ #{file.inputFileName} ]]"
+          file.outputFileText = _wrap(file.outputFileText)
   next()
 
 _wrap = (text) ->
