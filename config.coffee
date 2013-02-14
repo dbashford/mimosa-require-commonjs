@@ -1,5 +1,7 @@
 "use strict"
 
+path = require 'path'
+
 exports.defaults = ->
   requireCommonjs:
     exclude:[/[/\\]vendor[/\\]/, /[/\\]main[\.-]/]
@@ -23,6 +25,7 @@ exports.validate = (config, validators) ->
   errors = []
 
   if validators.ifExistsIsObject(errors, "requireCommonjs config", config.requireCommonjs)
-    validators.ifExistsFileExcludeWithRegexAndString(errors, "requireCommonjs.exclude", config.requireCommonjs, config.watch.compiledJavascriptDir)
+    javascriptDir = path.join config.watch.sourceDir, config.watch.javascriptDir
+    validators.ifExistsFileExcludeWithRegexAndString(errors, "requireCommonjs.exclude", config.requireCommonjs, javascriptDir)
 
   errors
