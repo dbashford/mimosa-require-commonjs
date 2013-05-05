@@ -9,7 +9,8 @@ registration = (mimosaConfig, register) ->
   register ['add','update','buildFile'], 'afterCompile', _applyCommonJSWrapper,  [mimosaConfig.extensions.javascript...]
 
 _applyCommonJSWrapper = (mimosaConfig, options, next) ->
-  return next() unless options.files?.length > 0
+  hasFiles = options.files?.length > 0
+  return next() unless hasFiles
 
   for file in options.files
     if mimosaConfig.requireCommonjs?.excludeRegex? and file.inputFileName.match mimosaConfig.requireCommonjs.excludeRegex

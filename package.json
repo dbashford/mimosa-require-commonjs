@@ -1,6 +1,6 @@
 {
   "name": "mimosa-require-commonjs",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "homepage": "http://www.mimosajs.com",
   "author": "David Bashford",
   "description": "A CommonJS wrapping module for Mimosa AMD/RequireJS projects",
@@ -27,5 +27,9 @@
   "license": "MIT",
   "engines": {
     "node": ">=0.8"
+  },
+  "main": "./lib/index",
+  "scripts": {
+    "prepublish": "mimosa build"
   }
 }
