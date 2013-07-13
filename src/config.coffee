@@ -11,7 +11,7 @@ exports.placeholder = ->
   \t
 
     # requireCommonjs:          # Configuration for the mimosa-require-commonjs module
-      # exclude:[/[/\\]vendor[/\\]/, /[/\\]main[\.-]/]  # List of regexes or strings to match
+      # exclude:[/[/\\\\]vendor[/\\\\]/, /[/\\\\]main[\\.-]/]  # List of regexes or strings to match
                                 # files that should be excluded from wrapping in requirejs'
                                 # commonjs wrapper.  String paths can be absolute or relative to
                                 # the watch.javascriptDir.  Regexes are applied to the entire path.
