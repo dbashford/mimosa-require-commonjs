@@ -9,9 +9,9 @@ This module provides CommonJS support via RequireJS and AMD.  So if you are a fa
 
 Stated differently, this module allows you to write your AMD/RequireJS application using CommonJS.
 
-Because this module still leverages AMD/RequireJS, when you write your browser code in CommonJS, you will still take advantage of all of the functionality provided by the `mimosa-require` module, like <a href="http://mimosajs.com/utilities.html#requirejs">path verification, and circular dependency checking</a> and <a href="http://mimosajs.com/optimization.html#require">on-the-fly optimization</a> if your entire application.
+Because this module still leverages AMD/RequireJS, when you write your browser code in CommonJS, you will still take advantage of all of the functionality provided by the `mimosa-require` module, like <a href="http://mimosa.io/utilities.html#requirejs">path verification, and circular dependency checking</a> and <a href="http://mimosa.io/optimization.html#require">on-the-fly optimization</a> if your entire application.
 
-For more information regarding Mimosa, see http://mimosajs.com
+For more information regarding Mimosa, see http://mimosa.io
 
 ## Usage
 
