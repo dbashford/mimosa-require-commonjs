@@ -1,11 +1,13 @@
 "use strict"
 
 config = require './config'
-logger = require 'logmimosa'
 
 defineRegex = /(?:(?!\.))define\(/
 
+logger = null
+
 registration = (mimosaConfig, register) ->
+  logger = mimosaConfig.log
   register ['add','update','buildFile'], 'afterCompile', _applyCommonJSWrapper,  [mimosaConfig.extensions.javascript...]
 
 _applyCommonJSWrapper = (mimosaConfig, options, next) ->
@@ -20,9 +22,12 @@ _applyCommonJSWrapper = (mimosaConfig, options, next) ->
     else
       if file.outputFileText?
         if file.outputFileText.match defineRegex
-          logger.debug "Not wrapping [[ #{file.inputFileName} ]], it already contains a define block"
+          if logger.isDebug()
+            logger.debug "Not wrapping [[ #{file.inputFileName} ]], it already contains a define block"
         else
-          logger.debug "CommonJS wrapping [[ #{file.inputFileName} ]]"
+          if logger.isDebug()
+            logger.debug "CommonJS wrapping [[ #{file.inputFileName} ]]"
+
           file.outputFileText = _wrap(file.outputFileText)
   next()
 
